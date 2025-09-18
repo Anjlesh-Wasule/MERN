@@ -103,6 +103,6 @@ reverse2DArray(input = [ [1,2], [2,3,4,5], [3,4,5,6] ]);
 
 /* Homework
 
-  Reverse columns of a 2D Matrix
+  Reverse columns of a 2D Matrix (n x n)
 
 */
