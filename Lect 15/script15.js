@@ -101,8 +101,53 @@ function reverse2DArray(arr){
 reverse2DArray(input = [ [1,2], [2,3,4,5], [3,4,5,6] ]); 
 
 
-/* Homework
+/* H.W -> Reverse columns of a 2D matrix
+ 
+input: [
+          [1, 2, 3, 4],
+          [2, 3, 4, 5],
+          [3, 4, 5, 6],
+        ]
+output: 
+  3 2 1
+  4 3 2
+  5 4 3
+  6 5 4
 
-  Reverse columns of a 2D Matrix (n x n)
+explanation: 
 
+actual array after reversing the colums will be
+[
+  [3, 4, 5, 6],
+  [2, 3, 4, 5],
+  [1, 2, 3, 4],
+]
 */
+
+input = [
+    [1,2,3,4],
+    [2,3,4,5],
+    [3,4,5,6]
+  ]
+
+
+function reverseColumnsOf2DArray(mat) {
+  let top = 0;
+  let bottom = mat.length - 1;
+
+  while (top < bottom) {
+    // Swap the rows
+    [mat[top], mat[bottom]] = [mat[bottom], mat[top]];
+    top++;
+    bottom--;
+  }
+
+  // Print nicely
+  for (let row of mat) {
+    console.log(row.join(' '));
+  }
+}
+console.log("\nOriginal array:");
+console.log(input);
+
+reverseColumnsOf2DArray(input);
