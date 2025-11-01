@@ -3,9 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>HTML Form Example</title>
+
+  <style>
+    body{
+      background-color: aliceblue;
+      
+    }
+
+    form{
+      background-color: rgb(255, 255, 127);
+      padding: 20px;
+      border: 2px solid black;
+      border-radius: 20px;
+      max-width: 500px;
+      font-size: large;
+    }
+
+  </style>
+
 </head>
 <body>
+  <h1>Revision on Table and Form </h1>
+  <br><br>
   
+  <form action="#" method="post">
+    <h2>Student Registration Form </h2>
+      
+      <br>
+      <label for="name" >Full Name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter your name" required>
+      
+      <br><br>
+      <label for="email">Email:</label>
+      <input type="email" id="name" name="name" placeholder="JohnDoe@email.com" required>
+
+      <br><br>
+      <label for="age">Age:</label>
+      <input type="number" name="age" id="age" required min="18" max="30">
+
+      <br><br>
+      <label for="branch">Branch</label>
+      <select name="branch" id="branch">
+        <option value="CSE">CSE</option>
+        <option value="ECE">ECE</option>
+        <option value="MECH">MECH</option>
+      </select>
+      
+      <br><br>
+      <button type="submit">Submit</button>
+      <button type="reset">Reset</button>
+  </form>
 </body>
 </html>
