@@ -1,0 +1,20 @@
+.c1{
+  color: rgba(255, 0, 0, 0.6); /* fourth value for transparency */
+  border: 2px solid black;
+  padding: 20px;
+  margin: 20px;
+}
+
+.c2{
+  /* C2 inherited red color of c1 class */
+  border: 2px solid blue;
+  padding: 20px;
+  margin: 20px;
+  letter-spacing: 2px;
+}
+
+#ltr-spc{
+  letter-spacing: 4px;
+  line-height: 3;
+
+}

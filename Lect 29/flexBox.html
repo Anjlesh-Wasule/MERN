@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flex Box and Grid</title>
+  <style>
+
+    body{
+      padding: 0;
+      margin: 0;
+    }
+    
+    .container{
+      margin: 20px;
+      border: 2px solid black;
+      padding: 20px;
+      line-height: 2;
+      /* background-color: teal; */
+      background-color: purple;
+      height: 500px;
+
+      display: flex;
+      /* flex-direction: row-reverse; */
+      /* flex-direction: column; */
+      /* flex-direction: column-reverse; */
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      /* justify-content: center; */
+      /* justify-content: end; */
+      justify-content: space-evenly;
+
+      /* align-items: last baseline; */
+      align-items: center;
+    }
+    
+    .item{
+      border: 3px solid black;
+      height: 30px;
+      margin: 10px;
+      padding: 5px;
+      width: 100px;
+      text-align:center;
+      /* background-color: azure; */
+      background-color: gold;
+      /* box-shadow: 5px 5px 10px rgb(99, 98, 98)  inset ; */
+      font-family: sans-serif;
+    }
+
+    #Two{
+      flex-grow: 1;
+    }
+
+    #Four{
+      flex-grow: 2;
+    }
+
+    .container1{
+      background-color: rgb(42, 39, 39);
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+      display: flex;
+      justify-content: space-between;
+      padding: 2px 8px;
+      align-items: center;
+    }
+
+    .nav{
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+
+      list-style-type: none;
+      gap: 20px;
+    }
+
+    li{
+      cursor:pointer;
+    }
+
+    .btn{
+      /* background-color: rgb(23, 193, 255); */
+      background-color: rgb(15, 105, 223);
+      height: 30px;
+      width: 80px;
+      border: none;
+      color: white;
+      cursor:pointer;
+    }
+    
+    #btn1{
+      /* background-color: rgb(15, 105, 223); */
+      background-color: rgb(23, 193, 255);
+    }
+
+  </style>
+</head>
+<body>
+  <!-- <div class="container">
+    <div class="item">One</div>
+    <div class="item" id="Two">Two</div>
+    <div class="item">Three</div>
+    <div class="item" id="Four">Four</div>
+    <div class="item">Five</div>
+
+    <div class="item">Six</div>
+    <div class="item" id="Seven">Seven</div>
+    <div class="item">Eight</div>
+    <div class="item">Nine</div>
+    <div class="item">Ten</div>
+  </div> -->
+
+  <div class="container1">
+    <h2 class="post">Posts</h2>
+    
+    <div class="nav">
+      <ul class="nav">
+        <li>Feed</li>
+        <li>Week</li>
+        <li>Month</li>
+        <li>Year</li>
+        <li>Infinity</li>
+        <li>Latest</li>
+      </ul>
+
+      <button class="btn">Login</button>
+      <button class="btn" id="btn1">SignUp</button>
+    </div>
+  </div>
+</body>
+</html>
