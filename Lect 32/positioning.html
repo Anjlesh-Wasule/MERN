@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Positioning in HTML: Absolute, Relative, Fixed</title>
+  <style>
+
+    body{
+      background-color: rgb(25, 24, 24);
+    }
+    .parent{
+      border: 3px solid rgb(198, 36, 63);
+
+      padding: 20px;
+      margin: 40px;
+
+      position: absolute;
+    }
+
+    .item1{
+      height: 200px;
+      width: 200px;
+      background-color: rgb(8, 224, 232);
+      display: inline-block;
+    }
+
+    .item2{
+      height: 200px;
+      width: 200px;
+      background-color: rgb(53, 223, 19);
+      display: inline-block;
+
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+    }
+
+    .item3{
+      height: 200px;
+      width: 200px;
+      background-color: rgb(68, 99, 193);
+      display: inline-block;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="parent">
+    <div class="item1">One</div>
+    <div class="item2">Two</div>
+    <div class="item3">Three</div>
+  </div>
+</body>
+</html>

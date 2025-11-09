@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu Buttom asssignment</title>
+    <style>
+      .ham, .square, .dot, .doner, .bento {
+        padding: 2px;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        margin: 10px;
+      }
+      .doner{
+        align-items: center;
+      }
+      .hamItem {
+        width: 2.5rem;
+        height: 0.5rem;
+        background-color: black;
+      }
+      .ham:hover .hamItem, .square:hover .sqItem, .dot:hover .dotItem {
+        background-color: rgba(68, 240, 76, 0.8);
+      }
+
+      .dotItem {
+        width: 1rem;
+        height: 1rem;
+        background-color: black;
+        border-radius: 50%;
+      }
+
+      .sqItem, .bentoItem{
+        width: 1rem;
+        height: 1rem;
+        background-color: black;
+      }
+
+      .bento{
+        display: grid;
+        grid-template-columns: 1rem 1rem 1rem;
+      }
+
+      .rDItem{
+        width: 1rem;
+        height: 1rem;
+        background-color: black;
+      }
+      .item3{
+        width:4rem;
+      }
+      .item2{
+        width:2rem;
+      }
+      .rdoner{
+        flex-direction: column-reverse;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ham">
+      <div class="hamItem"></div>
+      <div class="hamItem"></div>
+      <div class="hamItem"></div>
+    </div>
+
+    <div class="dot">
+      <div class="dotItem"></div>
+      <div class="dotItem"></div>
+      <div class="dotItem"></div>
+    </div>
+
+    <div class="square">
+      <div class="sqItem"></div>
+      <div class="sqItem"></div>
+      <div class="sqItem"></div>
+    </div>
+
+    <div class="doner">
+      <div class="rDItem item1"></div>
+      <div class="rDItem item2"></div>
+      <div class="rDItem item3"></div>
+    </div>
+
+    <div class="doner rdoner">
+      <div class="rDItem item1"></div>
+      <div class="rDItem item2"></div>
+      <div class="rDItem item3"></div>
+    </div>
+
+    <div class="bento">
+      <div class="bentoItem"></div>
+      <div class="bentoItem"></div>
+      <div class="bentoItem"></div>
+      <div class="bentoItem"></div>
+      <div class="bentoItem"></div>
+      <div class="bentoItem"></div>
+      <div class="bentoItem"></div>
+      <div class="bentoItem"></div>
+      <div class="bentoItem"></div>
+    </div>
+  </body>
+</html>
