@@ -1,0 +1,153 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.wrapper{
+  display: flex;
+}
+
+aside{
+  width: 18vw;
+  /* background-color: rgb(218, 217, 217); */
+  background-image: linear-gradient(black, purple, black);
+  height: 100vh;
+  border-right: 2px solid rgb(237, 235, 235);
+}
+.user{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  cursor: pointer;
+}
+
+.user img{
+  height: 10vh;
+  border-radius: 50%;
+  width: 5vw;
+  object-fit: cover;
+  box-shadow: 5px 5px 10px rgb(134, 134, 136);
+}
+
+h2{
+  margin-top: 20px;
+  font-size: xx-large;
+  color: white;
+}
+
+.friends{
+  margin-top: 40px;
+  line-height: 2;
+}
+
+.friend{
+  background-color: white;
+  margin: 10px;
+  padding-left: 20px;
+  font-size: 20px;
+  border-radius: 10px;
+}
+
+.friend:hover{
+  background-color: aliceblue;
+}
+
+.container{
+  width: 82vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  background-image: linear-gradient(black, blue, black);
+}
+
+.container span{
+  height: 10px;
+  width: 10px;
+  background-color: rgb(49, 228, 49);
+  display: inline-block;
+  border-radius: 50%;
+  font-weight: 100;
+  font-size: 10px;
+  padding: 8px;
+  box-shadow: 2px 2px 6px rgb(81, 255, 0);
+}
+
+.friend-name{
+  padding: 20px;
+  border-bottom: 2px solid rgb(237, 235, 235);
+}
+
+.message{
+  padding: 10px;
+  margin: 2px;
+  border: 2px solid rgb(127, 127, 127);
+  width: fit-content;
+  border-radius: 10px;
+  font-size: larger;
+}
+
+.chatarea{
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  max-height: 80vh;
+  overflow-y: scroll;
+}
+
+.received {
+  background-color: white; 
+  align-self: flex-start; 
+}
+
+.sent {
+  background-color: rgb(0, 179, 255);
+  align-self: flex-end;
+  color: white;
+  border: none;
+}
+
+.inputarea{
+  margin-bottom: 15px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgb(127, 127, 127);
+  border-bottom: 1px solid rgb(127, 127, 127);
+  width: 82vw;
+}
+
+.inputarea input{
+  border-radius: 20px;
+  font-size: 20px;
+  width: 75vw;
+  padding: 10px;
+  border: 1px solid gray;
+}
+
+input:focus{
+  outline: none;
+}
+
+.inputarea button{
+  margin-right: 30px;
+  margin-left: 10px;
+  border: none;
+  padding: 12px ;
+  font-size: larger;
+  border-radius: 20px;
+  background-color: dodgerblue;
+  color: white;
+}
+
+.inputarea button:hover{
+  background-color: rgb(8, 115, 221);
+}
+
