@@ -1,0 +1,41 @@
+body {
+  font-family: Arial;
+  font-size: 32px;
+  background-color: azure;
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid black;
+  margin: 32px;
+  background-color: white;
+}
+.card button {
+  background-color: rgb(255, 225, 0);
+  padding: 10px;
+}
+
+.centerBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: thistle;
+  width: 200px;
+  height: 200px;
+  font-size: medium;
+  margin-left: 3rem;
+}
+
+.m1 {
+  margin: 4px;
+}
+
+.m2 {
+  margin: 8px;
+}
+
+.m3 {
+  margin: 12px;
+}/*# sourceMappingURL=style.css.map */

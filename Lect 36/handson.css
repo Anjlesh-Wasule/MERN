@@ -1,0 +1,63 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  /* background: linear-gradient(100deg, #4f8fe3, #4fbee3,#594fe3); */
+  background: #d9d9d9;
+background: linear-gradient(137deg, rgba(217, 217, 217, 1) 0%, rgba(87, 199, 133, 1) 17%, rgba(208, 113, 124, 1) 41%, rgba(237, 221, 83, 1) 64%, rgba(140, 146, 255, 1) 85%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Poppins;
+  height: 100vh;
+}
+
+.wrapper{
+  background-color: bisque;
+  display: flex;
+  gap: 10px;
+  padding: 100px;
+  border-radius: 10px;
+  box-shadow: -5px 5px 100px rgb(241, 135, 135);
+  font-size: 3rem;
+  height: 2rem;
+  align-items: center;
+}
+
+.container{
+  color: rgb(255, 94, 0);
+  font-weight: 800;
+  padding: 8px;
+  height: 5rem;
+  overflow-y: hidden;
+  position: relative;
+}
+
+p{
+  animation: rotate 10s infinite ease-in-out;
+}
+
+@keyframes rotate {
+  0%, 15% {
+    transform: translateY(-4px);
+  }
+  20%, 35% {
+    transform: translateY(-5rem);
+  }
+  40%, 55% {
+    transform: translateY(-9.5rem);
+  }
+  60%, 75% {
+    transform: translateY(-14rem);
+  }
+  80%, 95% {
+    transform: translateY(-18.5rem);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+

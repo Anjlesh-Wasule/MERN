@@ -1,0 +1,58 @@
+$primary-color: rgb(255, 225, 0);
+$heading-font: Arial;
+$base-size: 32px;
+$bg-color: white;
+
+body{
+  font-family: $heading-font;
+  font-size: $base-size;
+  background-color: azure;
+}
+
+// button{
+//   background-color: $primary-color;
+//   padding: 20px;
+//   color: white;
+// }
+
+@mixin flex-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.card{
+  @include flex-center;
+
+  border: 2px solid black;
+  margin: $base-size;
+  background-color: $bg-color;
+
+  button{
+    background-color: $primary-color;
+    padding: 10px;
+  }
+}
+
+
+
+.centerBox{
+  @include flex-center;
+  background-color: thistle;
+  width: 200px;
+  height: 200px;
+  font-size: medium;
+  margin-left: 3rem;
+}
+
+$bg-color1: red;
+$bg-color2: rgb(0, 97, 27);
+$bg-color3: rgb(93, 0, 255);
+
+
+@for $i from 1 through 3{
+  .m#{$i}{
+    margin: #{$i*4}px;
+  }
+}

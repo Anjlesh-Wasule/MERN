@@ -1,0 +1,50 @@
+body{
+  background-color: aliceblue;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+}
+
+.container{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+
+.rotatingbox{
+  background-color: white;
+  padding: 10px;
+  width: 300px;
+  height: 35px;
+  overflow-y:hidden;
+  border-left: 4px solid brown;
+  
+}
+
+p{
+  margin: 0;
+  padding: 8px 0;
+  font-size: 20px;
+  animation: rotatebox 8s infinite ease;
+
+}
+
+@keyframes rotatebox {
+  0%, 24%{
+    transform: translateY(0);
+  }
+
+  25%, 49%{
+    transform: translateY(-40px);
+  }
+
+  50%, 74%{
+    transform: translateY(-80px);
+  }
+
+  75%, 100%{
+    transform: translateY(-120px);
+  }
+}
+
