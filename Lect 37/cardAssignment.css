@@ -1,0 +1,13 @@
+body{
+  background-color: rgb(253, 213, 11);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.cardfooter img{
+  height: 30px;
+  width: 30px;
+  
+}

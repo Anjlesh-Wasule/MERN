@@ -1,0 +1,28 @@
+body{
+  background-color: rgb(230, 230, 230);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container{
+  display: grid;
+  gap: 20px;
+  display: flex;
+}
+
+.card{
+  background-color: white;
+  box-shadow: 10px 10px 20px rgb(185, 185, 185);
+  width: 240px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.num{
+  font-size: xx-large;
+  color: rgb(21, 21, 252);
+  font-weight: 600;
+}
+
+p{
+  color: rgb(78, 78, 78);
+}
