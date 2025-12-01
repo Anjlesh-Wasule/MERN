@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Class Assignment 1</title>
+</head>
+<body>
+  <div id="info"></div>
+  <button id="btn">Add text</button>
+
+  <script>
+    document.querySelector("#btn").addEventListener('click', function(){
+      document.querySelector("#info").innerHTML = `<h1>Hello World</h1> <p>This text is created using JS</p>`;
+    })
+  </script>
+</body>
+</html>

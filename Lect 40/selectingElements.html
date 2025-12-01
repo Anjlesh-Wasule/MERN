@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selecting Elements using JS</title>
+</head>
+<body>
+  <div>
+    <h1 id="heading">Welcome</h1>
+    <p class="para">Hello</p>
+    <p class="para">World</p>
+    <p class="para">123</p>
+  </div>
+
+  <script>
+    let heading = document.getElementById("heading");
+    console.log(heading.innerHTML);
+
+    let classPara = document.getElementsByClassName("para");
+    console.log(classPara);
+
+    let para = document.querySelector(".para");
+    console.log(para);
+
+  </script>
+</body>
+</html>
