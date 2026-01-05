@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Grid</title>
+  <style>
+
+    .container{
+      display: grid;
+      grid-template-columns: repeat(40, 25px);
+      gap: 8px;
+      padding: 10px;
+      background-color: rgb(61, 59, 59);
+    }
+
+    .box{
+      height: 25px;
+      width: 25px;
+      border: 2px solid black;
+      display: inline;
+      background-color: black;
+      transition: all 0.5s ease-out;
+    }
+
+
+  </style>
+</head>
+<body>
+  <div class="container">
+  
+  </div>
+
+  <script src="colorGrid.js"></script>
+</body>
+</html>

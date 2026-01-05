@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form</title>
+  </head>
+  <body>
+    <form id="userInfo" action="/save" method="get">
+      <label for="firstName">First Name:</label>
+      <input type="text" name="firstName" id="firstName" />
+
+      <label for="lastName">Last Name:</label>
+      <input type="text" name="lastName" id="lastName" />
+      <br /><br />
+      <label for="gender">Gender</label>
+      <input type="radio" name="gender" id="male" value="male" />
+      <label for="gender">Male</label>
+
+      <input type="radio" name="gender" id="female" value="female" />
+      <label for="gender">Female</label>
+
+      <br /><br />
+      <p>Which fruits do you like?</p>
+
+      <label>
+        <input type="checkbox" name="fruit" value="watermelon" />
+        Watermelon
+      </label>
+
+      <label>
+        <input type="checkbox" name="fruit" value="apple" />
+        Apple
+      </label>
+
+      <label>
+        <input type="checkbox" name="fruit" value="banana" />
+        Banana
+      </label>
+
+      <label>
+        <input type="checkbox" name="fruit" value="mango" />
+        Mango
+      </label>
+      <br /><br />
+      <button type="submit">Submit</button>
+    </form>
+
+    <script src="main.js"></script>
+  </body>
+</html>
