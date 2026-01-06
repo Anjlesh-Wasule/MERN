@@ -9,7 +9,7 @@ formElement.addEventListener("submit", (e)=>{
 
   // alert(`The name is ${firstName.value} ${lastName.value}`)
 
-  // FormData - pass it in the formElement
+  // FormData - pass it the formElement
   let formData = new FormData(formElement);
   const firstName = formData.get("firstName");
   const lastName = formData.get("lastName");
