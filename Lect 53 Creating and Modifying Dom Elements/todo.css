@@ -1,0 +1,50 @@
+body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgb(28, 29, 90);
+}
+
+.container{
+  background-color: #a2e9f5;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid #000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 400px;
+  font-size: large;
+}
+
+#todo-list{
+  line-height: 2;
+  list-style-type: none;
+}
+
+.tabs{
+  padding: 4px;
+  background: white;
+  border: none;
+  border-radius: 5px;
+}
+
+li{
+  display: flex;
+  gap: 20px;
+}
+
+li button{
+  margin-left: auto;
+  height: 30px;
+  border-radius: 5px;
+  background-color: white;
+  border: none;
+}
+
+#stats{
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+}

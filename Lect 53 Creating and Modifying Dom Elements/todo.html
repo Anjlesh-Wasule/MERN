@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-do</title>
+  <link rel="stylesheet" href="todo.css">
+</head>
+<body>
+  <div class="container">
+    <h1>To-do List</h1>
+    <div>
+      <input type="text" id="todo-input" placeholder="Enter a new to-do">
+      <button class="tabs" id="add-todo-btn">Add To-do</button>
+    </div>
+
+    <div>
+      <button class="tabs">All todos</button>
+      <button class="tabs">Yet to do</button>
+      <button class="tabs">Completed</button>
+    </div>
+
+    <ul id="todo-list">
+      <!-- items are added dynamically through js -->
+       <li>
+        <input type="checkbox" class="todo-checkbox">
+        <span class="todo-text">Sample To-do Item</span>
+        <button class="delete-btn">Delete</button>
+       </li>
+    </ul>
+
+    <!-- Statistics -->
+    <div id="stats">
+      <h3>Stats</h3>
+      <p>Total</p>
+      <p>Yet To do</p>
+      <p>Completed</p>
+    </div>
+    
+  </div>
+  <script src="todo.js"></script>
+</body>
+</html>
