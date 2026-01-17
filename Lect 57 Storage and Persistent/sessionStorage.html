@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session storage</title>
+    <style>
+      #next-step {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="user-info">
+      <label for="firstName">First Name</label>
+      <input type="text" name="firstName" id="firstName" />
+      <br />
+      <label for="lastName">Last Name</label>
+      <input type="text" name="lastName" id="lastName" />
+      <br />
+      <label for="gender">Gender</label>
+      <input type="text" name="gender" id="gender" />
+      <br />
+      <button type="submit">Next</button>
+    </form>
+    <form id="next-step">
+      <label for="city">City</label>
+      <input type="text" name="city" id="city" />
+      <br />
+      <label for="state">State</label>
+      <input type="text" name="state" id="state" />
+      <br />
+      <label for="country">Country</label>
+      <input type="text" name="country" id="country" />
+      <br />
+      <button type="button" id="back-button">Back</button>
+      <button type="submit">Save</button>
+    </form>
+    <script src="sessionStorage.js"></script>
+  </body>
+</html>
