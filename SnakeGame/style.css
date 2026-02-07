@@ -1,0 +1,27 @@
+body{
+  background-color: rgb(27, 27, 27);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container{
+  border: 2px solid brown;
+  padding: 50px;
+
+  h1{
+    color: beige;
+  }
+}
+
+.snakeGame{
+  background-color: aliceblue;
+  height: 200px;
+  width: 200px;
+}
+
+.btn{
+  padding: 8px;
+  border-radius: 8px;
+}
