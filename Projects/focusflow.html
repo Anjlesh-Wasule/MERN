@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus Flow ⏱️🧠</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --danger: #ef4444;
+            --success: #22c55e;
+            --bg: #f3f4f6;
+            --card: #ffffff;
+            --text: #1f2937;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: var(--card);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        h1, h2 { text-align: center; margin-bottom: 1.5rem; }
+        
+        /* Utility */
+        .hidden { display: none !important; }
+        .fade-in { animation: fadeIn 0.3s ease-in; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Form Styling */
+        .form-group { margin-bottom: 1rem; }
+        label { display: block; font-weight: 500; margin-bottom: 0.5rem; }
+        input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+        input.invalid { border-color: var(--danger); }
+        .error-msg { color: var(--danger); font-size: 0.875rem; display: block; height: 1.25rem; margin-top: 0.25rem;}
+
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            /* FIX START: Ensure buttons are above overlay */
+            position: relative;
+            z-index: 20;
+            /* FIX END */
+        }
+        button:disabled { background-color: #9ca3af; cursor: not-allowed; }
+        button:hover:not(:disabled) { opacity: 0.9; }
+        button.secondary { background-color: var(--danger); margin-top: 1rem; }
+
+        /* Timer Dashboard */
+        .dashboard-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .timer-display {
+            font-size: 4rem;
+            font-weight: 700;
+            text-align: center;
+            font-variant-numeric: tabular-nums;
+            margin: 1rem 0;
+        }
+        progress {
+            width: 100%;
+            height: 0.75rem;
+            border-radius: 99px;
+            overflow: hidden;
+        }
+        progress::-webkit-progress-bar { background-color: #e5e7eb; }
+        progress::-webkit-progress-value { background-color: var(--primary); transition: width 0.5s linear; }
+
+        /* Quote Box */
+        .quote-box {
+            background-color: #eff6ff;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            text-align: center;
+            font-style: italic;
+            color: #374151;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Overlays */
+        #paused-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            border-radius: 12px;
+            z-index: 10;
+            color: var(--text);
+            backdrop-filter: blur(2px); /* Adds a nice blur effect */
+        }
+
+        /* Toast */
+        #toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 100;
+        }
+
+        /* History */
+        .history-section { margin-top: 2rem; border-top: 1px solid #e5e7eb; padding-top: 1rem; }
+        .history-item {
+            background: #f9fafb;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="toast">💾 Progress Saved</div>
+
+    <div class="container">
+        <h1>Focus Flow ⏱️</h1>
+
+        <div id="config-view">
+            <div class="form-group">
+                <label>Session Name</label>
+                <input type="text" id="inp-name" placeholder="e.g. JS Study">
+                <small class="error-msg" id="err-name"></small>
+            </div>
+            <div class="form-group">
+                <label>Study Duration (min)</label>
+                <input type="number" id="inp-study" value="25" min="5">
+                <small class="error-msg" id="err-study"></small>
+            </div>
+            <div class="form-group">
+                <label>Break Duration (min)</label>
+                <input type="number" id="inp-break" value="5" min="2">
+                <small class="error-msg" id="err-break"></small>
+            </div>
+            <div class="form-group">
+                <label>Cycles</label>
+                <input type="number" id="inp-cycles" value="4" min="1">
+                <small class="error-msg" id="err-cycles"></small>
+            </div>
+            <button id="btn-start" disabled>Start Session</button>
+        </div>
+
+        <div id="timer-view" class="hidden fade-in">
+            <div class="dashboard-header">
+                <span id="lbl-phase" style="font-weight: bold; color: var(--primary);">Studying 🧑‍💻</span>
+                <span id="lbl-cycle">Cycle 1 of 4</span>
+            </div>
+            
+            <div class="timer-display" id="lbl-time">00:00</div>
+            <progress id="progress-bar" value="0" max="100"></progress>
+
+            <div id="quote-area" class="hidden">
+                <div class="quote-box" id="lbl-quote">Loading motivation...</div>
+            </div>
+
+            <div style="margin-top: 1.5rem; position: relative;">
+                <button id="btn-pause">Pause</button>
+                <button id="btn-stop" class="secondary">End Session</button>
+                
+                <div id="paused-overlay" class="hidden">PAUSED</div>
+            </div>
+        </div>
+
+        <div class="history-section">
+            <h3>History</h3>
+            <div id="history-list">
+                <div style="color: #9ca3af; text-align: center; font-size: 0.9rem;">No sessions yet.</div>
+            </div>
+        </div>
+    </div>
+
+<script>
+/**
+ * STATE MANAGEMENT
+ */
+const STORAGE_KEY = 'focus_flow_state';
+const HISTORY_KEY = 'focus_flow_history';
+
+let state = {
+    active: false,
+    paused: false,
+    config: { name: '', study: 25, break: 5, cycles: 4 },
+    current: {
+        phase: 'study', // 'study' or 'break'
+        cycle: 1,
+        timeLeft: 0,
+        totalTime: 0 // Duration of current phase in seconds
+    }
+};
+
+let timerInterval = null;
+let saveInterval = null;
+
+/**
+ * DOM ELEMENTS
+ */
+const el = {
+    views: { config: document.getElementById('config-view'), timer: document.getElementById('timer-view') },
+    inputs: {
+        name: document.getElementById('inp-name'),
+        study: document.getElementById('inp-study'),
+        break: document.getElementById('inp-break'),
+        cycles: document.getElementById('inp-cycles')
+    },
+    errors: {
+        name: document.getElementById('err-name'),
+        study: document.getElementById('err-study'),
+        break: document.getElementById('err-break'),
+        cycles: document.getElementById('err-cycles')
+    },
+    timer: {
+        time: document.getElementById('lbl-time'),
+        phase: document.getElementById('lbl-phase'),
+        cycle: document.getElementById('lbl-cycle'),
+        progress: document.getElementById('progress-bar'),
+        quoteArea: document.getElementById('quote-area'),
+        quoteText: document.getElementById('lbl-quote'),
+        overlay: document.getElementById('paused-overlay')
+    },
+    btns: {
+        start: document.getElementById('btn-start'),
+        pause: document.getElementById('btn-pause'),
+        stop: document.getElementById('btn-stop')
+    },
+    toast: document.getElementById('toast'),
+    history: document.getElementById('history-list')
+};
+
+/**
+ * VALIDATION LOGIC
+ */
+const validate = () => {
+    const v = {
+        name: el.inputs.name.value.length >= 3,
+        study: Number(el.inputs.study.value) >= 5,
+        break: Number(el.inputs.break.value) >= 2,
+        cycles: Number(el.inputs.cycles.value) >= 1
+    };
+
+    // Show/Hide Errors
+    el.errors.name.textContent = v.name ? '' : 'Name must be 3+ chars';
+    el.errors.study.textContent = v.study ? '' : 'Min 5 minutes';
+    el.errors.break.textContent = v.break ? '' : 'Min 2 minutes';
+    el.errors.cycles.textContent = v.cycles ? '' : 'Min 1 cycle';
+
+    // Enable Button if all valid
+    el.btns.start.disabled = !(v.name && v.study && v.break && v.cycles);
+    return v.name && v.study && v.break && v.cycles;
+};
+
+// Debounce input events for validation
+const inputs = Object.values(el.inputs);
+inputs.forEach(inp => inp.addEventListener('input', validate));
+
+/**
+ * TIMER LOGIC
+ */
+const startSession = (restoredState = null) => {
+    if (restoredState) {
+        state = restoredState;
+    } else {
+        // New Session
+        state.config = {
+            name: el.inputs.name.value,
+            study: Number(el.inputs.study.value),
+            break: Number(el.inputs.break.value),
+            cycles: Number(el.inputs.cycles.value)
+        };
+        state.active = true;
+        state.paused = false;
+        state.current = {
+            phase: 'study',
+            cycle: 1,
+            timeLeft: state.config.study * 60,
+            totalTime: state.config.study * 60
+        };
+    }
+
+    // UI Switch
+    el.views.config.classList.add('hidden');
+    el.views.timer.classList.remove('hidden');
+    
+    // Start Loops
+    clearInterval(timerInterval);
+    timerInterval = setInterval(tick, 1000);
+    
+    clearInterval(saveInterval);
+    saveInterval = setInterval(autoSave, 10000); // Save every 10s
+
+    updateUI();
+};
+
+const tick = () => {
+    if (state.paused || !state.active) return;
+
+    if (state.current.timeLeft > 0) {
+        state.current.timeLeft--;
+        updateUI();
+    } else {
+        handlePhaseSwitch();
+    }
+};
+
+const handlePhaseSwitch = async () => {
+    if (state.current.phase === 'study') {
+        state.current.phase = 'break';
+        state.current.totalTime = state.config.break * 60;
+        state.current.timeLeft = state.current.totalTime;
+        fetchQuote();
+    } else {
+        if (state.current.cycle < state.config.cycles) {
+            state.current.cycle++;
+            state.current.phase = 'study';
+            state.current.totalTime = state.config.study * 60;
+            state.current.timeLeft = state.current.totalTime;
+        } else {
+            completeSession();
+            return;
+        }
+    }
+    autoSave();
+    updateUI();
+};
+
+/**
+ * ASYNC & PROMISES (Motivational Quote)
+ */
+const fetchQuote = async () => {
+    el.timer.quoteArea.classList.remove('hidden');
+    el.timer.quoteText.textContent = "Fetching wisdom...";
+    
+    try {
+        const quotes = [
+            "Focus is the key to success.",
+            "Work hard in silence, let success make the noise.",
+            "The secret of getting ahead is getting started.",
+            "Don't watch the clock; do what it does. Keep going."
+        ];
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        const random = quotes[Math.floor(Math.random() * quotes.length)];
+        el.timer.quoteText.textContent = `"${random}"`;
+    } catch (error) {
+        el.timer.quoteText.textContent = "Take a deep breath.";
+    }
+};
+
+/**
+ * UI UPDATES
+ */
+const formatTime = (s) => {
+    const mins = Math.floor(s / 60).toString().padStart(2, '0');
+    const secs = (s % 60).toString().padStart(2, '0');
+    return `${mins}:${secs}`;
+};
+
+const updateUI = () => {
+    // Labels
+    el.timer.time.textContent = formatTime(state.current.timeLeft);
+    el.timer.cycle.textContent = `Cycle ${state.current.cycle} of ${state.config.cycles}`;
+    
+    // Phase
+    if (state.current.phase === 'study') {
+        el.timer.phase.textContent = "Studying 🧑‍💻";
+        el.timer.phase.style.color = "var(--primary)";
+        el.timer.quoteArea.classList.add('hidden');
+    } else {
+        el.timer.phase.textContent = "Break Time ☕";
+        el.timer.phase.style.color = "var(--success)";
+    }
+
+    // Progress Bar
+    const elapsed = state.current.totalTime - state.current.timeLeft;
+    const pct = (elapsed / state.current.totalTime) * 100;
+    el.timer.progress.value = pct;
+
+    // Paused State
+    if (state.paused) {
+        el.timer.overlay.classList.remove('hidden');
+        el.btns.pause.textContent = "Resume";
+    } else {
+        el.timer.overlay.classList.add('hidden');
+        el.btns.pause.textContent = "Pause";
+    }
+};
+
+/**
+ * CONTROLS & STORAGE
+ */
+el.btns.start.addEventListener('click', () => startSession());
+
+el.btns.pause.addEventListener('click', () => {
+    state.paused = !state.paused;
+    autoSave();
+    updateUI();
+});
+
+el.btns.stop.addEventListener('click', () => {
+    completeSession(false);
+});
+
+const completeSession = (finished = true) => {
+    state.active = false;
+    clearInterval(timerInterval);
+    clearInterval(saveInterval);
+    localStorage.removeItem(STORAGE_KEY);
+    
+    const historyItem = {
+        name: state.config.name,
+        date: new Date().toLocaleTimeString(),
+        status: finished ? 'Completed 🎉' : 'Stopped 🛑'
+    };
+    
+    const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+    history.unshift(historyItem);
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+    
+    renderHistory();
+    el.views.timer.classList.add('hidden');
+    el.views.config.classList.remove('hidden');
+    el.inputs.name.value = "";
+    validate();
+};
+
+const autoSave = () => {
+    if (state.active) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        el.toast.style.opacity = 1;
+        setTimeout(() => el.toast.style.opacity = 0, 1500);
+    }
+};
+
+const renderHistory = () => {
+    const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+    el.history.innerHTML = history.length ? '' : '<div style="text-align:center; color:#9ca3af">No sessions yet.</div>';
+    
+    history.forEach(h => {
+        const div = document.createElement('div');
+        div.className = 'history-item';
+        div.innerHTML = `<span><strong>${h.name}</strong></span> <span>${h.status} (${h.date})</span>`;
+        el.history.appendChild(div);
+    });
+};
+
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden && state.active && !state.paused) {
+        state.paused = true;
+        updateUI();
+    }
+});
+
+const init = () => {
+    renderHistory();
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+        try {
+            startSession(JSON.parse(saved));
+        } catch (e) {
+            localStorage.removeItem(STORAGE_KEY);
+        }
+    }
+    validate();
+};
+
+init();
+</script>
+</body>
+</html>

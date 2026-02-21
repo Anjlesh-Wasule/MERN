@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>focus-flow</title>
+  </head>
+
+  <body>
+    <main id="focus-flow">
+      <div id="title"> FOCUS FLOW </div>
+      <form id="create-session-form" class="hidden">
+        <section class="fields">
+          <section class="field-group">
+            <label for="session-name">Name</label>
+            <input type="text" name="session-name" id="session-name" required />
+          </section>
+          <span class="validation-msg">Session name should be 3 characters or more.</span>
+        </section>
+
+        <section class="fields">
+          <section class="field-group">
+            <label for="duration">Study Duration</label>
+            <input type="number" name="duration" id="duration" required />
+          </section>
+          <span class="validation-msg">Study duration should be 5 mins or more.</span>
+        </section>
+
+        <section class="fields">
+          <section class="field-group">
+            <label for="break">Break Duration</label>
+            <input type="number" name="break-duration" id="break-duration" required />
+          </section>
+          <span class="validation-msg">Break duration should be 2 mins or more</span>
+        </section>
+
+        <section class="fields">
+          <section class="field-group">
+            <label for="cycles">Cycles</label>
+            <input type="number" name="cycles" id="cycles" required />
+          </section>
+          <span class="validation-msg">Cycle should be 1 or more.</span>
+        </section>
+
+        <button type="submit" disabled id="start-session">Start Session</button>
+      </form>
+
+      <article id="session-view" class="hidden">
+        <h1 class="title">Session Name</h1>
+
+        <section class="status">
+          Status: <span class="status-value"></span>
+        </section>
+
+        <section class="motivational-quote hidden"></section>
+
+        <section class="timer">
+          <section>
+            <span class="minutes">MM</span><span>:</span><span class="seconds">SS</span>
+          </section>
+        </section>
+
+        <section class="progress">
+          <section class="progress-indicator"></section>
+        </section>
+
+        <section class="cycle">cycle</section>
+
+        <footer>
+          <button id="pause">⏸️ Pause</button>
+          <button id="resume" class="hidden">▶️ Resume</button>
+          <button id="new-session" class="hidden">New Session</button>
+
+          <div id="history"></div>
+
+        </footer>
+        
+        
+      </article>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
