@@ -1,0 +1,18 @@
+nav{
+  padding: 10px;
+  background-color: rgb(252, 247, 218);
+  height: 6vh;
+  border-bottom: 2px solid black;
+}
+
+ul{
+ display: flex;
+ justify-content: space-around;
+ align-items: center;
+ gap: 20px;
+
+ li{
+  list-style:none;
+  font-size: 20px;
+ }
+}

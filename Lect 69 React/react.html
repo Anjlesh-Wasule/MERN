@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React using ESM.sh and Babel</title>
+  </head>
+  <body>
+    <main id="root"></main>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Babel-->
+    <script type="module">
+      import React from "https://esm.sh/react?dev";
+      import { createRoot } from "https://esm.sh/react-dom/client?dev";
+
+      window.React = React;
+      window.createRoot = createRoot;
+
+      // const section = React.createElement("section", {
+      //   className : "container",
+      //   children : [
+      //     React.createElement("span", {
+      //       children: "Hello",
+      //     }),
+
+      //     React.createElement("span", {
+      //       children: "World",
+      //       className: "title",
+      //       style: {
+      //         color: "royalblue",
+      //         backgroundColor: "rosybrown",
+      //       },
+
+      //       onClick: () => {
+      //         console.log("clicked");
+      //       }
+      //     }),
+      //   ]
+      // })
+
+      // console.log(section);
+      // const root = document.getElementById("root");
+
+      // createRoot(root).render(section);
+    </script>
+
+    <script type="text/babel">
+      const greeting = "";
+
+      function Message() {
+        return "Hi- from Message";
+      }
+
+      const Message2 = (props) => {
+        return (
+          <span>
+            {props.msg}
+            <br />
+          </span>
+        );
+      };
+
+      const section = (
+        /* 
+        <section>
+          <span>Hello</span>
+
+          <span>World</span>
+          </section>
+         */
+
+        <section>
+          {greeting ? greeting : "HEY!"}  {/*  {}  => interpolation     accepts a js function*/}
+          {greeting ? <span>{greeting}</span> : <b>No greetings found</b>}
+          {Message()}
+          {Message2({ msg: "Hello From Message2" })}
+
+          {Message2({ msg: "Hello! This is react props.message" })}  {/* normal way of calling a function with props */}
+
+          {/* The react way*/}
+          <Message2 msg="Hello from Message2 with react way of passing props"/>
+        </section>
+      );
+
+      
+
+      console.log(section);
+      const root = document.getElementById("root");
+      createRoot(root).render(section);
+    </script>
+  </body>
+</html>
