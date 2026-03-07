@@ -3,6 +3,14 @@ const express = require("express");
 const app = express();
 app.use(express.json()); // middleware
 
+function logger(req, res, next){
+  console.log("logger called");
+  console.log(req.url);
+  next();
+}
+
+app.use(logger);  
+
 const users = [{
             "id": 1,
             "name": "Leanne Graham",
