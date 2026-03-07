@@ -1,9 +1,9 @@
-import { createServer } from "node:http";
-const server = createServer((req, res) => {
-    const { url, method } = req;
+const express = require("express");
 
-    if (url.includes("/user") && method.toLowerCase() === "get") {
-        const users = [{
+const app = express();
+app.use(express.json()); // middleware
+
+const users = [{
             "id": 1,
             "name": "Leanne Graham",
             "username": "Bret",
@@ -74,57 +74,38 @@ const server = createServer((req, res) => {
         },
         ];
 
-        const urlReq = new URL(`https://${req.headers.host}/${url}`);
-        const name = urlReq.searchParams.get("name");
-        try{
-          const userId = parseInt(urlReq.pathname.split("/")?.at(-1));
-          let result = users;
+app.get("/", (req, res)=> {
+  res.send("Hello express");
+})
 
-          if(userId){
-            result = users.find(user => userId === user.id);
-          }
+app.get("/user", (req, res)=> {
+  // res.send(users);
 
-           if(name){
-            result = users.find(user => user.name.includes(name));
-          }
+  // reading query params
+  if(req.query.name){
+    res.json(users.find(user => user.name.includes(req.query.name)))
+  }
 
-          res.statusCode = 200;
-          res.setHeader("Content-Type", "application/json");
-          res.end(JSON.stringify(result));
-        }
-        catch(e){
-          res.statusCode  = 500;
-          console.log(e);
-          res.end(JSON.stringify({error: "Error while processing request"}));
-        }
-    } else if (url === "/user" && method.toLowerCase() === "post") {
-        console.log(url, req.body);
-        console.log("post called")
-        res.end(crypto.randomUUID())
+  res.json(users);
+})
 
-    } else if (url === "/") {
-        res.end(`
-            <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nodejs Intro</title>
-  </head>
-  <body>
-    <h1>Welcome!</h1>
-    <p>This is coming from server</p>
 
-  </body>
-</html>
+app.get("/users/:id", (req, res) => {
+  const userId = parseInt(req.params.id);
+  console.log(req.params);
+  res.status(200).send(users.find(user => user.id === userId))
+})
 
-            `)
-    }
 
+app.post("/user", (req, res) => {
+  const {user} = req.body;
+  console.log(user);
+  res.status(201);
+  res.send("User Created");
 
 })
 
-server.listen(3001, "127.0.0.1", () => {
-    console.log("Server is running on 127.0.0.1:3001")
-})
 
+app.listen(3002, () => {
+  console.log("server started on port: 3002");
+});
